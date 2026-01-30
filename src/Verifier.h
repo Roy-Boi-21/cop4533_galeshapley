@@ -9,7 +9,11 @@
 using namespace std;
 
 class Verifier {
+    vector<pair<Node*, Node*>> matches;
 
+public:
+    Verifier(vector<pair<Node*, Node*>> matches);
+    string verify();
 };
 
 

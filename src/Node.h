@@ -28,6 +28,7 @@ public:
     pair<bool, Node*> assign(Node* node);
     void add_preference(Node* node);
     void add_preferences(vector<Node*> nodes);
+    vector<Node*> get_upper_preferences();
 
     void print();
     void print_preferences();

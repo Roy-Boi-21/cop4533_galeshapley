@@ -48,9 +48,12 @@ int main() {
 
     Matcher m(hospitals, students);
     vector<pair<Node*, Node*>> matches = m.match();
-    for (auto match : matches) {
+    /*for (auto match : matches) {
         match.first->print();
-    }
+    }*/
+
+    Verifier v(matches);
+    cout << v.verify() << endl;
 
     // Deallocate the hospitals and students.
     for (int i = 0; i < n; i++) {

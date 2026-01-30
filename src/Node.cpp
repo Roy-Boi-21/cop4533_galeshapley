@@ -83,6 +83,18 @@ void Node::add_preferences(vector<Node*> nodes) {
     }
 }
 
+vector<Node*> Node::get_upper_preferences() {
+    vector<Node*> upper_preferences;
+    for (auto preference : preferences) {
+        if (preference == assigned_node) {
+            return upper_preferences;
+        } else {
+            upper_preferences.push_back(preference);
+        }
+    }
+    return upper_preferences;
+}
+
 void Node::print() {
     if (assigned_node == nullptr) {
         cout << type << " " << id << " is unassigned.";

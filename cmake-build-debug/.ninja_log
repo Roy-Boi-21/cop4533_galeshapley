@@ -11,3 +11,10 @@
 1565	1884	7914988814395464	GaleShapley.exe	cbcf144b28ba791
 6	1016	7914991398391771	CMakeFiles/GaleShapley.dir/src/main.cpp.obj	e350158fbd94bce4
 1017	1274	7914991400860624	GaleShapley.exe	cbcf144b28ba791
+32	941	7915059237319213	CMakeFiles/GaleShapley.dir/src/Verifier.cpp.obj	14ae1dd56f638c83
+14	1177	7915059239688973	CMakeFiles/GaleShapley.dir/src/Node.cpp.obj	cb013a53da4e4538
+5	1196	7915059239853020	CMakeFiles/GaleShapley.dir/src/main.cpp.obj	e350158fbd94bce4
+22	1269	7915059240625736	CMakeFiles/GaleShapley.dir/src/Matcher.cpp.obj	b35f39aa0942f3ba
+1269	1757	7915059245479729	GaleShapley.exe	cbcf144b28ba791
+5	744	7915059772991678	CMakeFiles/GaleShapley.dir/src/main.cpp.obj	e350158fbd94bce4
+744	924	7915059774746741	GaleShapley.exe	cbcf144b28ba791

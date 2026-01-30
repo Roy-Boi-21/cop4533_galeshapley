@@ -46,9 +46,9 @@ int Node::get_node_preference(Node* node) {
     return -1;
 }
 
-bool Node::assign(Node* node) {
+pair<bool, Node*> Node::assign(Node* node) {
     if (node == nullptr) {
-        return false;
+        return pair(false, nullptr);
     }
 
     if (node->get_type() == type) {
@@ -60,16 +60,16 @@ bool Node::assign(Node* node) {
         // If a node is vacant, accept it.
         assigned_node = node;
         node->set_assigned(this);
-        return true;
+        return pair(true, nullptr);
     } else if (get_node_preference(this) > get_node_preference(assigned)) {
         // If a node prefers this node more to their current one, accept this node.
         assigned_node = node;
         node->set_assigned(this);
         assigned->set_assigned(nullptr);
-        return true;
+        return pair(false, assigned);
     } else {
         // If a node prefers their current node to this node, reject this node.
-        return false;
+        return pair(false, nullptr);
     }
 }
 

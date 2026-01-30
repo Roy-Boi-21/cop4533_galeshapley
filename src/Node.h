@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <vector>
+#include <utility>
 using namespace std;
 
 class Node {
@@ -24,7 +25,7 @@ public:
     void set_assigned(Node* node);
     int get_node_preference(Node* node);
 
-    bool assign(Node* node);
+    pair<bool, Node*> assign(Node* node);
     void add_preference(Node* node);
     void add_preferences(vector<Node*> nodes);
 

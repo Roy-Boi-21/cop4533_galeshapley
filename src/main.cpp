@@ -37,12 +37,19 @@ int main() {
     }
 
     // DEBUG: Output the preference lists.
-    for (auto h : hospitals) {
+    /*for (auto h : hospitals) {
         h->print_preferences();
     }
     cout << endl;
     for (auto s : students) {
         s->print_preferences();
+    }
+    cout << endl;*/
+
+    Matcher m(hospitals, students);
+    vector<pair<Node*, Node*>> matches = m.match();
+    for (auto match : matches) {
+        match.first->print();
     }
 
     // Deallocate the hospitals and students.

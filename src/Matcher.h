@@ -6,10 +6,18 @@
 #define GALESHAPLEY_MATCHER_H
 
 #include "Node.h"
+#include <queue>
+#include <vector>
+#include <utility>
 using namespace std;
 
 class Matcher {
+    vector<Node*> hospitals;
+    vector<Node*> students;
 
+public:
+    Matcher(vector<Node*> hospitals, vector<Node*> students);
+    vector<pair<Node*, Node*>> match();
 };
 
 

@@ -11,15 +11,16 @@ using namespace std;
 
 class Node {
     string type;
-    string name;
+    int id;
     Node* assigned_node;
     vector<Node*> preferences;
 
 public:
-    Node(string type, string name);
+    Node(string type, int id);
     string get_type();
-    string get_name();
+    int get_id();
     Node* get_assigned();
+    vector<Node*> get_preferences();
     void set_assigned(Node* node);
     int get_node_preference(Node* node);
 
@@ -28,6 +29,7 @@ public:
     void add_preferences(vector<Node*> nodes);
 
     void print();
+    void print_preferences();
 };
 
 

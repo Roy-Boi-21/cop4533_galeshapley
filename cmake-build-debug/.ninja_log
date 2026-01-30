@@ -1,0 +1,13 @@
+# ninja log v5
+35	1310	7914982992003568	CMakeFiles/GaleShapley.dir/src/Matcher.cpp.obj	b35f39aa0942f3ba
+53	1319	7914982992025034	CMakeFiles/GaleShapley.dir/src/Verifier.cpp.obj	14ae1dd56f638c83
+1	1563	7914982994539268	CMakeFiles/GaleShapley.dir/src/main.cpp.obj	e350158fbd94bce4
+19	1582	7914982994710716	CMakeFiles/GaleShapley.dir/src/Node.cpp.obj	cb013a53da4e4538
+1583	2412	7914983002885803	GaleShapley.exe	cbcf144b28ba791
+20	1356	7914988809163114	CMakeFiles/GaleShapley.dir/src/Matcher.cpp.obj	b35f39aa0942f3ba
+44	1365	7914988809244433	CMakeFiles/GaleShapley.dir/src/Verifier.cpp.obj	14ae1dd56f638c83
+9	1540	7914988811063579	CMakeFiles/GaleShapley.dir/src/main.cpp.obj	e350158fbd94bce4
+33	1564	7914988811283689	CMakeFiles/GaleShapley.dir/src/Node.cpp.obj	cb013a53da4e4538
+1565	1884	7914988814395464	GaleShapley.exe	cbcf144b28ba791
+6	1016	7914991398391771	CMakeFiles/GaleShapley.dir/src/main.cpp.obj	e350158fbd94bce4
+1017	1274	7914991400860624	GaleShapley.exe	cbcf144b28ba791

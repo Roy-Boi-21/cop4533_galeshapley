@@ -6,9 +6,9 @@
 #include <utility>
 using namespace std;
 
-Node::Node(string type, string name) {
+Node::Node(string type, int id) {
     this->type = std::move(type);
-    this->name = std::move(name);
+    this->id = id;
     assigned_node = nullptr;
 }
 
@@ -16,12 +16,16 @@ string Node::get_type() {
     return type;
 }
 
-string Node::get_name() {
-    return name;
+int Node::get_id() {
+    return id;
 }
 
 Node* Node::get_assigned() {
     return assigned_node;
+}
+
+vector<Node*> Node::get_preferences() {
+    return preferences;
 }
 
 void Node::set_assigned(Node* node) {
@@ -81,9 +85,16 @@ void Node::add_preferences(vector<Node*> nodes) {
 
 void Node::print() {
     if (assigned_node == nullptr) {
-        cout << type << " " << name << " is unassigned.";
+        cout << type << " " << id << " is unassigned.";
     } else {
-        cout << type << " " << name << " is assigned to "
-        << assigned_node->get_type() << " " << assigned_node->get_name() << endl;
+        cout << type << " " << id << " is assigned to "
+        << assigned_node->get_type() << " " << assigned_node->get_id() << endl;
+    }
+}
+
+void Node::print_preferences() {
+    cout << type << " " << id << "'s Preferences:" << endl;
+    for (int j = 0; j < preferences.size(); j++) {
+        cout << j + 1 << ": " << preferences[j]->get_type() << " " << preferences[j]->get_id() << endl;
     }
 }

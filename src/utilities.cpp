@@ -113,6 +113,7 @@ pair<vector<Node*>, vector<Node*>> generate_data() {
     cout << "Enter an integer how many hospitals and students should be generated:" << endl;
     int n = 0;
     cin >> n;
+    srand((unsigned) time(nullptr));
 
     // Create the hospitals and students.
     vector<int> valid_numbers;

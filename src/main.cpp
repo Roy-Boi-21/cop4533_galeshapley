@@ -60,14 +60,23 @@ int main() {
         match.first->print();
     }*/
 
-    Verifier v(matches);
-    cout << v.verify() << endl;
-
     chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
 
     chrono::duration<double> time_span = chrono::duration_cast<chrono::duration<double>>(end - start);
 
-    cout << "Matching and verifying " + to_string(matches.size()) + " hospitals with students took "
+    cout << "Matching " + to_string(matches.size()) + " hospitals to students took "
+         << time_span.count() << " seconds." << endl;
+
+    start = chrono::high_resolution_clock::now();
+
+    Verifier v(matches);
+    cout << v.verify() << endl;
+
+    end = chrono::high_resolution_clock::now();
+
+    time_span = chrono::duration_cast<chrono::duration<double>>(end - start);
+
+    cout << "Verifying " + to_string(matches.size()) + " matches took "
          << time_span.count() << " seconds." << endl;
 
     // Deallocate the hospitals and students.

@@ -19,9 +19,29 @@ will output whether the match is valid and stable,
 invalid, or unstable.
 
 ## Assumptions
-Every file must be in the "cmake-build-debug" folder for the program to read the file.
+Every input file must be in the "cmake-build-debug" folder for the program to read the file.
 This program assumes you're running it in the CLion IDE with
 the C++ standard set to C++ 17.
 
 ## Task C
+Below are two line graphs representing the running times of the
+matching and verifying algorithms vs the size of input.  I decided
+to use C++'s chrono library to measure the time it took for both
+algorithms to finish given a specified size of input.
 
+These algorithms were run on a laptop running Windows 11 with
+8GB of RAM and 1GHz CPU.  All the input has been randomly generated
+through the program's "generate_data()" function.
+
+**Matching Time VS Number of Pairs**
+![image](data/matching_vs_n.png)
+
+**Verifying Time VS Number of Pairs**
+![image](data/verifying_vs_n.png)
+
+I've noticed that the time it takes to match and verify increasing
+numbers of pairs tends to grow exponentially.  All the running times
+for both algorithms took less than 1 second for values of n less
+than or equal to 4096 pairs.  The time for the algorithms to finish
+skyrocketed at 16384 pairs (37.370 seconds to match and 6.666 seconds to
+verify the matches).

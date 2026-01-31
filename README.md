@@ -7,6 +7,8 @@ Created by David Visbal Gomez (UFID: 11497647)
 
 ## Matcher & Verifier Instructions
 The matcher and verifier run together in the same program.
+The user can choose to run one of the two individually or both
+at once.
 They will execute after all the data has been parsed in the
 program.  There are three ways to input data.
 1. Manually typing out the data by hand.
@@ -14,9 +16,9 @@ program.  There are three ways to input data.
 3. Randomly generating the data.
 
 After all the data has been processed, the output of the 
-matching will go a file called "output.txt" and the console
-will output whether the match is valid and stable, 
-invalid, or unstable.
+matching will go a file called "output.txt" in the
+cmake-build-debug folder and the console will output 
+whether the match is valid and stable, invalid, or unstable.
 
 ## Assumptions
 Every input file must be in the "cmake-build-debug" folder for the program to read the file.

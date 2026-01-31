@@ -116,11 +116,6 @@ pair<vector<Node*>, vector<Node*>> generate_data() {
     srand((unsigned) time(nullptr));
 
     // Create the hospitals and students.
-    vector<int> valid_numbers;
-    for (int i = 1; i <= n; i++) {
-        valid_numbers.push_back(i);
-    }
-
     vector<Node*> hospitals;
     vector<Node*> students;
     for (int i = 1; i <= n; i++) {
@@ -176,4 +171,111 @@ void write_to_file(const vector<pair<Node*, Node*>>& nodes) {
         file << node_pair.first->get_id() << ' ' << node_pair.second->get_id() << endl;
     }
     cout << "Matches written to \"" + filename + "\"" << endl;
+}
+
+vector<pair<Node*, Node*>> read_matches_manually(const pair<vector<Node*>, vector<Node*>>& data) {
+    vector<pair<Node*, Node*>> matches;
+    vector<Node*> hospitals = data.first;
+    vector<Node*> students = data.second;
+
+    cout << "Type " << hospitals.size() << " pairs of two integers between 1 and "
+         << hospitals.size() << "." << endl;
+    for (int i = 0; i < hospitals.size(); i++) {
+        cout << "Pair " << i + 1 << "/" << hospitals.size() << ": ";
+        int h_id = 0;
+        int s_id = 0;
+        cin >> h_id;
+        cin >> s_id;
+        Node* h = hospitals[h_id - 1];
+        Node* s = students[s_id - 1];
+
+        h->set_assigned(s);
+        s->set_assigned(h);
+        matches.emplace_back(h, s);
+    }
+
+    return matches;
+}
+
+vector<pair<Node*, Node*>> read_matches_file(const pair<vector<Node*>, vector<Node*>>& data) {
+    vector<pair<Node*, Node*>> matches;
+    vector<Node*> hospitals = data.first;
+    vector<Node*> students = data.second;
+
+    string filename;
+    ifstream file;
+    while (true) {
+        cout << "Enter the name of the file to read in:  (\"example.txt\")" << endl;
+        cin >> filename;
+        file.open(filename);
+        if (file.good()) {
+            break;
+        } else {
+            cout << "ERROR: File not found." << endl;
+        }
+    }
+
+    string line;
+    while (getline(file, line)) {
+        vector<int> nums = line_to_numbers(line);
+
+        int h_id = nums[0];
+        int s_id = nums[1];
+        Node* h = hospitals[h_id - 1];
+        Node* s = students[s_id - 1];
+
+        h->set_assigned(s);
+        s->set_assigned(h);
+        matches.emplace_back(h, s);
+    }
+
+    file.close();
+
+    return matches;
+}
+
+vector<pair<Node*, Node*>> generate_matches(const pair<vector<Node*>, vector<Node*>>& data) {
+    vector<pair<Node*, Node*>> matches;
+    vector<Node*> hospitals = data.first;
+    vector<Node*> students = data.second;
+
+    srand((unsigned) time(nullptr));
+    int n = hospitals.size();
+
+    vector<int> number_pool;
+    for (int j = 1; j <= n; j++) {
+        number_pool.push_back(j);
+    }
+    queue<int> h_numbers;
+    while (!number_pool.empty()) {
+        int j = rand() % number_pool.size();
+        h_numbers.push(number_pool[j]);
+        number_pool.erase(number_pool.begin() + j);
+    }
+
+    for (int j = 1; j <= n; j++) {
+        number_pool.push_back(j);
+    }
+    queue<int> s_numbers;
+    while (!number_pool.empty()) {
+        int j = rand() % number_pool.size();
+        s_numbers.push(number_pool[j]);
+        number_pool.erase(number_pool.begin() + j);
+    }
+
+    while (!h_numbers.empty() && !s_numbers.empty()) {
+        int h_id = h_numbers.front();
+        int s_id = s_numbers.front();
+        Node* h = hospitals[h_id - 1];
+        Node* s = students[s_id - 1];
+
+        h->set_assigned(s);
+        s->set_assigned(h);
+        matches.emplace_back(h, s);
+
+        h_numbers.pop();
+        s_numbers.pop();
+    }
+
+    return matches;
 }

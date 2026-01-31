@@ -10,8 +10,30 @@ using namespace std;
 int main() {
     // Ask how the user wants to input data into the program.
     string choice;
+    bool run_matching = false;
+    bool run_verifier = false;
+
+    cout << "Welcome to the Gale-Shapley Algorithm!" << endl;
     while (true) {
-        cout << "How will you input the data?" << endl;
+        cout << "What would you like to run?" << endl;
+        cout << "1. Matching Engine" << endl;
+        cout << "2. Verifier" << endl;
+        cout << "3. Both" << endl;
+        cin >> choice;
+
+        run_matching = ((choice == "1") || (choice == "3"));
+        run_verifier = ((choice == "2") || (choice == "3"));
+
+        if ((choice == "1") || (choice == "2") || (choice == "3")) {
+            break;
+        } else {
+            cout << "Please choose a valid option." << endl;
+        }
+    }
+
+    choice.clear();
+    while (true) {
+        cout << "How will you input the data about the hospitals and students?" << endl;
         cout << "1. Manually" << endl;
         cout << "2. Read a file" << endl;
         cout << "3. Randomly generate data" << endl;
@@ -25,17 +47,18 @@ int main() {
 
     vector<Node*> hospitals;
     vector<Node*> students;
+    pair<vector<Node*>, vector<Node*>> data;
 
     if (choice == "1") {
-        pair<vector<Node*>, vector<Node*>> data = read_manually();
+        data = read_manually();
         hospitals = data.first;
         students = data.second;
     } else if (choice == "2") {
-        pair<vector<Node*>, vector<Node*>> data = read_from_file();
+        data = read_from_file();
         hospitals = data.first;
         students = data.second;
     } else {
-        pair<vector<Node*>, vector<Node*>> data = generate_data();
+        data = generate_data();
         hospitals = data.first;
         students = data.second;
     }
@@ -50,34 +73,77 @@ int main() {
     }
     cout << endl;*/
 
-    chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
+    if (run_matching) {
+        chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
 
-    Matcher m(hospitals, students);
-    vector<pair<Node*, Node*>> matches = m.match();
-    write_to_file(matches);
-    // DEBUG: Print out the matches.
-    /*for (auto match : matches) {
-        match.first->print();
-    }*/
+        Matcher m(hospitals, students);
+        vector<pair<Node *, Node *>> matches = m.match();
+        write_to_file(matches);
+        // DEBUG: Print out the matches.
+        /*for (auto match : matches) {
+            match.first->print();
+        }*/
 
-    chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
+        chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
 
-    chrono::duration<double> time_span = chrono::duration_cast<chrono::duration<double>>(end - start);
+        chrono::duration<double> time_span = chrono::duration_cast<chrono::duration<double>>(end - start);
 
-    cout << "Matching " + to_string(matches.size()) + " hospitals to students took "
-         << time_span.count() << " seconds." << endl;
+        cout << "Matching " + to_string(matches.size()) + " hospitals to students took "
+             << time_span.count() << " seconds." << endl;
 
-    start = chrono::high_resolution_clock::now();
+        // This code will only execute if both engines are run at once.
+        if (run_verifier) {
+            start = chrono::high_resolution_clock::now();
 
-    Verifier v(matches);
-    cout << v.verify() << endl;
+            Verifier v(matches);
+            cout << v.verify() << endl;
 
-    end = chrono::high_resolution_clock::now();
+            end = chrono::high_resolution_clock::now();
 
-    time_span = chrono::duration_cast<chrono::duration<double>>(end - start);
+            time_span = chrono::duration_cast<chrono::duration<double>>(end - start);
 
-    cout << "Verifying " + to_string(matches.size()) + " matches took "
-         << time_span.count() << " seconds." << endl;
+            cout << "Verifying " + to_string(matches.size()) + " matches took "
+                 << time_span.count() << " seconds." << endl;
+        }
+    }
+
+    if (run_verifier) {
+        choice.clear();
+        while (true) {
+            cout << "How will you input the matches about the hospitals and students?" << endl;
+            cout << "1. Manually" << endl;
+            cout << "2. Read a file" << endl;
+            cout << "3. Randomly generate matches" << endl;
+            cin >> choice;
+            if ((choice == "1") || (choice == "2") || (choice == "3")) {
+                break;
+            } else {
+                cout << "Please choose a valid option." << endl;
+            }
+        }
+
+        vector<pair<Node*, Node*>> matches;
+
+        if (choice == "1") {
+            matches = read_matches_manually(data);
+        } else if (choice == "2") {
+            matches = read_matches_file(data);
+        } else {
+            matches = generate_matches(data);
+        }
+
+        chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
+
+        Verifier v(matches);
+        cout << v.verify() << endl;
+
+        chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
+
+        chrono::duration<double> time_span = chrono::duration_cast<chrono::duration<double>>(end - start);
+
+        cout << "Verifying " + to_string(matches.size()) + " matches took "
+             << time_span.count() << " seconds." << endl;
+    }
 
     // Deallocate the hospitals and students.
     for (int i = 0; i < hospitals.size(); i++) {

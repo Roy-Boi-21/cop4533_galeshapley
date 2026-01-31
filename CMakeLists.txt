@@ -9,4 +9,6 @@ add_executable(GaleShapley src/main.cpp
         src/Matcher.cpp
         src/Matcher.h
         src/Verifier.cpp
-        src/Verifier.h)
+        src/Verifier.h
+        src/utilities.cpp
+        src/utilities.h)

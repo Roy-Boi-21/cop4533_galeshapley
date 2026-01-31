@@ -19,7 +19,7 @@ vector<pair<Node*, Node*>> Matcher::match() {
 
     while (!hospital_queue.empty()) {
         Node* h = hospital_queue.front();
-        for (auto s : h->get_preferences()) {
+        for (auto s : h->get_upper_preferences()) {
             pair<bool, Node*> result = h->assign(s);
             bool assign_successful = result.first;
             Node* unassigned_node = result.second;

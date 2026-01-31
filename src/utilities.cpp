@@ -109,6 +109,65 @@ pair<vector<Node*>, vector<Node*>> read_from_file() {
     return {hospitals, students};
 }
 
+pair<vector<Node*>, vector<Node*>> generate_data() {
+    cout << "Enter an integer how many hospitals and students should be generated:" << endl;
+    int n = 0;
+    cin >> n;
+
+    // Create the hospitals and students.
+    vector<int> valid_numbers;
+    for (int i = 1; i <= n; i++) {
+        valid_numbers.push_back(i);
+    }
+
+    vector<Node*> hospitals;
+    vector<Node*> students;
+    for (int i = 1; i <= n; i++) {
+        hospitals.push_back(new Node("Hospital", i));
+        students.push_back(new Node("Student", i));
+    }
+    for (int i = 0; i < n; i++) {
+        Node* h = hospitals[i];
+        vector<int> number_pool;
+        for (int j = 1; j <= n; j++) {
+            number_pool.push_back(j);
+        }
+        queue<int> numbers;
+        while (!number_pool.empty()) {
+            int j = rand() % number_pool.size();
+            numbers.push(number_pool[j]);
+            number_pool.erase(number_pool.begin() + j);
+        }
+        int number = 0;
+        for (int j = 0; j < students.size(); j++) {
+            number = numbers.front();
+            h->add_preference(students[number - 1]);
+            numbers.pop();
+        }
+    }
+    for (int i = 0; i < n; i++) {
+        Node* s = students[i];
+        vector<int> number_pool;
+        for (int j = 1; j <= n; j++) {
+            number_pool.push_back(j);
+        }
+        queue<int> numbers;
+        while (!number_pool.empty()) {
+            int j = rand() % number_pool.size();
+            numbers.push(number_pool[j]);
+            number_pool.erase(number_pool.begin() + j);
+        }
+        int number = 0;
+        for (int j = 0; j < hospitals.size(); j++) {
+            number = numbers.front();
+            s->add_preference(hospitals[number - 1]);
+            numbers.pop();
+        }
+    }
+
+    return {hospitals, students};
+}
+
 void write_to_file(const vector<pair<Node*, Node*>>& nodes) {
     string filename = "output.txt";
     ofstream file(filename);

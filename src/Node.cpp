@@ -61,12 +61,12 @@ pair<bool, Node*> Node::assign(Node* node) {
         assigned_node = node;
         node->set_assigned(this);
         return pair(true, nullptr);
-    } else if (get_node_preference(this) > get_node_preference(assigned)) {
+    } else if (node->get_node_preference(this) < node->get_node_preference(assigned)) {
         // If a node prefers this node more to their current one, accept this node.
         assigned_node = node;
         node->set_assigned(this);
         assigned->set_assigned(nullptr);
-        return pair(false, assigned);
+        return pair(true, assigned);
     } else {
         // If a node prefers their current node to this node, reject this node.
         return pair(false, nullptr);
@@ -85,6 +85,11 @@ void Node::add_preferences(vector<Node*> nodes) {
 
 vector<Node*> Node::get_upper_preferences() {
     vector<Node*> upper_preferences;
+
+    if (assigned_node == nullptr) {
+        return preferences;
+    }
+
     for (auto preference : preferences) {
         if (preference == assigned_node) {
             return upper_preferences;

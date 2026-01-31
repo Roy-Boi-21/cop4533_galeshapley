@@ -33,7 +33,8 @@ string Verifier::verify() {
             bool s_prefers_h = s->get_node_preference(s->get_assigned()) > s->get_node_preference(h);
             if (s_prefers_h) {
                 return "UNSTABLE: " + h->get_type() + " " + to_string(h->get_id()) + " and " +
-                s->get_type() + " " + to_string(s->get_id()) + " prefer but neither are assigned to each other.";
+                s->get_type() + " " + to_string(s->get_id()) +
+                " prefer each other but neither are assigned to each other.";
             }
         }
     }

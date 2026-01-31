@@ -13,8 +13,9 @@ int main() {
         cout << "How will you input the data?" << endl;
         cout << "1. Manually" << endl;
         cout << "2. Read a file" << endl;
+        cout << "3. Randomly generate data" << endl;
         cin >> choice;
-        if ((choice == "1") || (choice == "2")) {
+        if ((choice == "1") || (choice == "2") || (choice == "3")) {
             break;
         } else {
             cout << "Please choose a valid option." << endl;
@@ -28,8 +29,12 @@ int main() {
         pair<vector<Node*>, vector<Node*>> data = read_manually();
         hospitals = data.first;
         students = data.second;
-    } else {
+    } else if (choice == "2") {
         pair<vector<Node*>, vector<Node*>> data = read_from_file();
+        hospitals = data.first;
+        students = data.second;
+    } else {
+        pair<vector<Node*>, vector<Node*>> data = generate_data();
         hospitals = data.first;
         students = data.second;
     }

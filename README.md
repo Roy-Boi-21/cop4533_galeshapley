@@ -7,8 +7,11 @@ Created by David Visbal Gomez (UFID: 11497647)
 
 ## Matcher & Verifier Instructions
 The matcher and verifier run together in the same program.
-Input the data through typing it manually or through
-reading in a text file in the cmake-build-debug folder.
+They will execute after all the data has been parsed in the
+program.  There are three ways to input data.
+1. Manually typing out the data by hand.
+2. Passing in a text file.
+3. Randomly generating the data.
 
 After all the data has been processed, the output of the 
 matching will go a file called "output.txt" and the console
@@ -17,5 +20,8 @@ invalid, or unstable.
 
 ## Assumptions
 Every file must be in the "cmake-build-debug" folder for the program to read the file.
+This program assumes you're running it in the CLion IDE with
+the C++ standard set to C++ 17.
 
 ## Task C
+

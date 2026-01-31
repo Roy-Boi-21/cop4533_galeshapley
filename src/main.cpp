@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <chrono>
 #include "utilities.h"
 #include "Node.h"
 #include "Matcher.h"
@@ -49,6 +50,8 @@ int main() {
     }
     cout << endl;*/
 
+    chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
+
     Matcher m(hospitals, students);
     vector<pair<Node*, Node*>> matches = m.match();
     write_to_file(matches);
@@ -59,6 +62,13 @@ int main() {
 
     Verifier v(matches);
     cout << v.verify() << endl;
+
+    chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
+
+    chrono::duration<double> time_span = chrono::duration_cast<chrono::duration<double>>(end - start);
+
+    cout << "Matching and verifying " + to_string(matches.size()) + " hospitals with students took "
+         << time_span.count() << " seconds." << endl;
 
     // Deallocate the hospitals and students.
     for (int i = 0; i < hospitals.size(); i++) {

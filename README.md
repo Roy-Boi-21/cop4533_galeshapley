@@ -1,5 +1,5 @@
 # COP4533 Programming Assignment 1: GaleShapley
-Created by David Visbal Gomez (UFID: 11497647)
+Created by Roy Buenavidez
 
 ## Compile Instructions
 1. Clone into a CLion repository.
